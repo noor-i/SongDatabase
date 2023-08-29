@@ -1,7 +1,9 @@
 // Song Class: A class that stores a single database record.
+#ifndef SONG_H
+#define SONG_H
 #include <iostream>
 #include <string>
-#include <sstream>
+
 
 class Song
 {
@@ -20,6 +22,8 @@ public:
     std::string getTitle(){return title;}
     std::string getSinger(){return singer;}
     int getYear(){return year;}
-    std::string getSong(){title + ", " + singer + ", " + std::to_string(year);}
+    std::string getSong(){return title + ", " + singer + ", " + std::to_string(year);}
 
 };
+
+#endif
