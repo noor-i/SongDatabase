@@ -1,29 +1,31 @@
 // Song Class: A class that stores a single database record.
-#ifndef SONG_H
-#define SONG_H
 #include <iostream>
+#include <stdlib.h>
+#include <stdio.h>
 #include <string>
 
-
-class Song
-{
-//Encapsulation: granting access to private data only through controlled public interfaces
-private:
+class Song {
     std::string title;
-    std::string singer;
+    std::string artist;
     int year;
 
 public:
-    //Setters/Mutators 
-    void setTitle(std::string title){this->title = title;}
-    void setSinger(std::string singer){this->singer = singer;}
-    void setYear(int year){this->year = year;}
+    //Constructors
+    Song(){}
+    Song(std::string title, std::string artist, int year);
+    Song(const Song& other);
+
+    //Destructor
+    ~Song();
+
     //Getters
-    std::string getTitle(){return title;}
-    std::string getSinger(){return singer;}
-    int getYear(){return year;}
-    std::string getSong(){return title + ", " + singer + ", " + std::to_string(year);}
+    std::string getTitle() const;
+    std::string getArtist() const;
+    int getYear() const;
+
+    //Setters
+    void setTitle(std::string title);
+    void setArtist(std::string title);
+    void setYear(int year);
 
 };
-
-#endif
