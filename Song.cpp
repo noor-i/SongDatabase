@@ -23,7 +23,7 @@ Song::Song(const Song &other)
 
 //Destructor
 Song::~Song(){
-    // cleanup code
+
 }
 
 // Getters
