@@ -1,3 +1,6 @@
+#ifndef SONG_H
+#define SONG_H
+
 // Song Class: A class that stores a single database record.
 #include <iostream>
 #include <stdlib.h>
@@ -12,7 +15,7 @@ class Song {
 
 public:
     //Constructors
-    Song(){} // default constructor 
+    Song(); // default constructor 
     Song(std::string genre, std::string title, std::string artist, int year); // parameterized constructor 
     Song(const Song& other); // copy constructor 
 
@@ -32,3 +35,5 @@ public:
     void setYear(int year);
 
 };
+
+#endif // SONG_H

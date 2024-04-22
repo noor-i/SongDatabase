@@ -43,6 +43,7 @@ int Song::getYear() const{
     return year;
 }
 
+
 // Setters
 void Song::setGenre(std::string genre){
     this->genre = genre;
