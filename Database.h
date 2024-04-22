@@ -1,7 +1,6 @@
+#ifndef DATABASE_H
+#define DATABASE_H
 // Database Class: stores all records.
-#include <stdio.h>
-#include <stdlib.h>
-#include <iostream>
 #include <string>
 #include "Song.h"
 
@@ -22,3 +21,5 @@ public:
     //void removeSong(const Song &song);
 
 };
+
+#endif DATABASE_H
