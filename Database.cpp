@@ -20,7 +20,7 @@ int Database::getCapacity() const{
     return capacity;
 }
 
-int Database::getNumSongs() const{
+int Database::getCurrentSize() const{
     return numSongs;
 }
 
