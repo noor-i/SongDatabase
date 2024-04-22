@@ -5,8 +5,9 @@
 Song::Song() {}
 
 // Parameterized Constructor
-Song::Song(std::string title, std::string artist, int year)
+Song::Song(std::string genre, std::string title, std::string artist, int year)
 {
+    this->genre = genre;
     this->title = title;
     this->artist = artist;
     this->year = year;
@@ -26,6 +27,10 @@ Song::~Song(){
 }
 
 // Getters
+std::string Song::getGenre() const{
+    return genre;
+}
+
 std::string Song::getTitle() const{
     return title;
 }
@@ -39,6 +44,10 @@ int Song::getYear() const{
 }
 
 // Setters
+void Song::setGenre(std::string genre){
+    this->genre = genre;
+}
+
 void Song::setTitle(std::string title){
     this->title = title;
 }
