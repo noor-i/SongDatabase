@@ -28,7 +28,8 @@ public:
 
     void stringSearch(std::string string); 
     void substringSearch(std::string string);
-    void numberSearch(int number);
+    void yearSearch(int number);
+    void rangeSearch(int number);
 
     //void deleteSong(const Song& song);
     
