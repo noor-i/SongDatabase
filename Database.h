@@ -43,6 +43,9 @@ public:
     void deleteBySubString(std::string string);
     void deleteByYear(int year);
     void deleteByRange(int year1, int year2);
+
+    // Listing songs
+    
 };
 
 #endif //DATABASE_H
