@@ -24,9 +24,11 @@ public:
     int getCurrentSize() const; // get current number of songs in playlist
 
     // Methods
-    void addSong(const Song &song);
+    void addSong(const Song& song);
     
-
+    //Helpers
+    bool songDuplicate();
+    bool isValidYear();
 };
 
 #endif //DATABASE_H
