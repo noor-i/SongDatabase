@@ -23,19 +23,25 @@ public:
     int getCapacity() const; // get capacity 
     int getCurrentSize() const; // get current number of songs in playlist
 
-    // Methods
-    void addSong(const Song& song); // adding a song
+    /* Methods */
+    // Adding songs
+    void addSong(const Song& song); 
 
+    // Finding songs
     void stringSearch(std::string string); 
     void substringSearch(std::string string);
-    void yearSearch(int number);
-    void rangeSearch(int number);
+    void yearSearch(int year);
+    void rangeSearch(int year1, int year2);
 
-    //void deleteSong(const Song& song);
+    // Deleting songs
+    void deleteByString(std::string string);
+    void deleteBySubString(std::string string);
+    void deleteByYear(int year);
     
     //Helpers
     bool songDuplicate(const Song &song);
     bool isValidYear(int year);
+    void deleteRecord(int index);
 };
 
 #endif //DATABASE_H
