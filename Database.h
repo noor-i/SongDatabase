@@ -24,11 +24,17 @@ public:
     int getCurrentSize() const; // get current number of songs in playlist
 
     // Methods
-    void addSong(const Song& song);
+    void addSong(const Song& song); // adding a song
+
+    void stringSearch(std::string string); 
+    void substringSearch(std::string string);
+    void numberSearch(int number);
+
+    //void deleteSong(const Song& song);
     
     //Helpers
-    bool songDuplicate();
-    bool isValidYear();
+    bool songDuplicate(const Song &song);
+    bool isValidYear(int year);
 };
 
 #endif //DATABASE_H
