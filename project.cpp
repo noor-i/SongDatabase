@@ -1,6 +1,6 @@
 // main file
 #include "Song.h"
-//#include "Database.h"
+#include "Database.h"
 //#include "Menu.h"
 
 
@@ -15,5 +15,9 @@ std::cout << "song year: " << s1.getYear()<< "\n";
 s1.setArtist("Cigarettes After Sex");
 
 std::cout << "song artist: " << s1.getArtist()<< "\n";
+
+Database db;
+
+db.addSong(s1);
 
 }

@@ -78,10 +78,8 @@ bool Database::songDuplicate(const Song &song){
             songs[i].getYear() == song.getYear()){
             return true;
             }
-        else{
-            return false;
-        }
     }
+    return false;
 }
 
 // Checks if a valid year is used for input.
@@ -318,3 +316,23 @@ void Database::deleteByRange(int year1, int year2){
         std::cout << "No results found." << std::endl;
     }     
 }
+
+/*
+For each string field in your record, allow the user to list all
+records in alphabetical order.
+*/
+
+/*
+For each string field in your record, allow the user to list all
+records in reverse alphabetical order.
+*/
+
+/*
+For each numeric field in your record, allow the user to list all
+records in ascending order.
+*/
+
+/*
+For each numeric field in your record, allow the user to list all
+records in descending order.
+*/
