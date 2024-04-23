@@ -190,16 +190,18 @@ void Database::rangeSearch(int year1, int year2){
 /*
 (1 mark) When deleting a record, one way to do this is to search by the
 exact string that occurs in a field of the record.
-
-(1 mark) When deleting a record, one way to do this is to search for
-numbers in a field that appear in a low to high range of numbers.
-In all cases of deleting records:
-    display the searched-for records to the user, and then ask them if they are
-    sure they want to delete them
-
-    if no matching records are found, then print a helpful message to the screen
-    telling the user this
 */
+// Helper for delete methods.
+void Database::deleteRecord(int index){
+    if (index < 0 || index >= numSongs) {
+        std::cout << "Invalid index." << std::endl;
+    }
+    for(int i = index; i < numSongs-1; i++){ //shift the songs down
+        songs[i] = songs[i+1];
+    }
+    numSongs--;
+}
+
 void Database::deleteByString(std::string string){
     bool flag = false;
     for(int i = 0; i< numSongs; i++){
@@ -221,34 +223,98 @@ void Database::deleteByString(std::string string){
             }
             else{
                 std::cout << "Deletion cancelled." << std::endl;
-            }
-        
+            } 
     }
-
     if (flag == false){
         std::cout << "No matching record found." << std::endl;
     }
 }
 
-// Helper for delete methods.
-void Database::deleteRecord(int index){
-    if (index < 0 || index >= numSongs) {
-        std::cout << "Invalid index." << std::endl;
-    }
-    for(int i = index; i < numSongs-1; i++){ //shift the songs down
-        songs[i] = songs[i+1];
-    }
-    numSongs--;
-}
-
 /*(1 mark) When deleting a record, one way to do this is to search for a
 substring that occurs in a field of the record.*/
 void Database::deleteBySubString(std::string string){
-
+    bool flag = false;
+    for(int i = 0; i< numSongs; i++){
+        if(songs[i].getGenre().find(string) != std::string::npos || 
+           songs[i].getTitle().find(string) != std::string::npos ||
+           songs[i].getArtist().find(string) != std::string::npos){
+                std::cout << "Genre: " << songs[i].getGenre() 
+                          << " Title: " << songs[i].getTitle()
+                          << " Artist: " << songs[i].getArtist()
+                          << " Year: " << songs[i].getYear() << std::endl;
+            }
+        flag = true;
+        std::cout << "Are you sure you want to delete the following song? (Y/N)" << std::endl;
+            std::string result;
+            std::cin >> result;
+            if (result == "Y" || result == "y"){
+                deleteRecord(i);
+                std::cout << "Song deleted." << std::endl;
+            }
+            else{
+                std::cout << "Deletion cancelled." << std::endl;
+            } 
+    }
+    if (flag == false){
+        std::cout << "No results found." << std::endl;
+    }
 }
 
 /*(1 mark) When deleting a record, one way to do this is to search by the
 exact number that occurs in a field of the record.*/
 void Database::deleteByYear(int year){
+    bool flag = false;
+    for(int i = 0; i< numSongs; i++){
+        if(songs[i].getYear() == year){
+                std::cout << "Genre: " << songs[i].getGenre() 
+                          << " Title: " << songs[i].getTitle()
+                          << " Artist: " << songs[i].getArtist()
+                          << " Year: " << songs[i].getYear() << std::endl;
+            }
+        flag = true;
+        std::cout << "Are you sure you want to delete the following song? (Y/N)" << std::endl;
+            std::string result;
+            std::cin >> result;
+            if (result == "Y" || result == "y"){
+                deleteRecord(i);
+                std::cout << "Song deleted." << std::endl;
+            }
+            else{
+                std::cout << "Deletion cancelled." << std::endl;
+            } 
+    }
+    if(flag == false){
+        std::cout << "No results found." << std::endl;
+    }   
+}
 
+/*
+(1 mark) When deleting a record, one way to do this is to search for
+numbers in a field that appear in a low to high range of numbers.
+*/
+void Database::deleteByRange(int year1, int year2){
+    bool flag = false;
+    for(int i = 0; i< numSongs; i++){
+        if (songs[i].getYear() == year1 ||
+            songs[i].getYear() == year2){
+                std::cout << "Genre: " << songs[i].getGenre() 
+                          << " Title: " << songs[i].getTitle()
+                          << " Artist: " << songs[i].getArtist()
+                          << " Year: " << songs[i].getYear() << std::endl;
+            }
+            flag = true; 
+            std::cout << "Are you sure you want to delete the following song? (Y/N)" << std::endl;
+            std::string result;
+            std::cin >> result;
+            if (result == "Y" || result == "y"){
+                deleteRecord(i);
+                std::cout << "Song deleted." << std::endl;
+            }
+            else{
+                std::cout << "Deletion cancelled." << std::endl;
+            } 
+    }
+    if(flag == false){
+        std::cout << "No results found." << std::endl;
+    }     
 }
