@@ -25,6 +25,9 @@ public:
     int getCurrentSize() const; // get current number of songs in playlist
 
     // Methods //
+    // Printing songs
+    void printSongs(Song *songs);
+
     // Adding songs
     void addSong(const Song& song); 
 
@@ -38,6 +41,7 @@ public:
     bool songDuplicate(const Song &song);
     bool isValidYear(int year);
     void deleteRecord(int index);
+    void swap(Song song1, Song song2);
 
     // Deleting songs
     void deleteByString(std::string string);
@@ -45,14 +49,23 @@ public:
     void deleteByYear(int year);
     void deleteByRange(int year1, int year2);
 
-    // Listing songs
-    void swap(std::string str1, std::string str2);
-    void printGenreAlphaOrder(const Song* songs);
-    void printArtistAlphaOrder(const Song* songs);
-    void printSongNameAlphaOrder(const Song* songs);
+    // Listing songs alphabetically 
+    void swap(Song song1, Song song2);
+    void genreAlphaOrder(Song* songs);
+    void printGenreAlpha(Song* songs);
+    void artistAlphaOrder(Song* songs);
+    void printArtistAlpha(Song* songs);
+    void songNameAlphaOrder(Song* songs);
+    void printSongNameAlpha(Song* songs);
 
-    // Printing songs
-    void printSongs(const Song *song);
+    // Listing songs reverse alphabetically 
+    void swap(Song song1, Song song2);
+    void genreRevAlphaOrder(Song* songs);
+    void printGenreRevAlpha(Song* songs);
+    void artistRevAlphaOrder(Song* songs);
+    void printArtistRevAlpha(Song* songs);
+    void songNameRevAlphaOrder(Song* songs);
+    void printSongNameRevAlpha(Song* songs);
 };
 
 #endif //DATABASE_H

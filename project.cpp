@@ -5,12 +5,15 @@
 
 
 int main() {
-Song s1 = Song("indie", "K", "CAS", 2013);
+Song s1 = Song("Indie", "K", "CAS", 2013);
 
-std::cout << "song artist: " << s1.getArtist()<< "\n";
-std::cout << "song genre: " << s1.getGenre()<< "\n";
-std::cout << "song title: " << s1.getTitle()<< "\n";
-std::cout << "song year: " << s1.getYear()<< "\n";
+std::cout << "(Genre, Song name, Artist, Year)\n"
+                                        << "------------------------------\n"
+                                        << s1.getGenre() 
+                                        << ", " << s1.getTitle()
+                                        << ", " << s1.getArtist()
+                                        << ", " << s1.getYear()
+                                        << std::endl;
 
 s1.setArtist("Cigarettes After Sex");
 
