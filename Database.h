@@ -66,6 +66,10 @@ public:
     void printArtistRevAlpha(Song* songs);
     void songNameRevAlphaOrder(Song* songs);
     void printSongNameRevAlpha(Song* songs);
+
+    // Listing songs ascending/descending by year
+    void printAscendOrder(Song *songs);
+    void printDescendOrder(Song *songs);
 };
 
 #endif //DATABASE_H

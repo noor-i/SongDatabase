@@ -445,8 +445,29 @@ void Database::printSongNameRevAlpha(Song* songs){
 For each numeric field in your record, allow the user to list all
 records in ascending order.
 */
+void Database::printAscendOrder(Song *songs){
+    for(int i=0; i< numSongs-1; i++){
+        for(int j=0; j<numSongs-1-i; j++){
+            if(songs[j].getYear() > songs[j+1].getYear()){
+                swap(songs[j], songs[j+1]);
+            }
+        }
+    }
+    printSongs(songs);
+}
+
 
 /*
 For each numeric field in your record, allow the user to list all
 records in descending order.
 */
+void Database::printDescendOrder(Song *songs){
+    for(int i=0; i< numSongs-1; i++){
+        for(int j=0; j<numSongs-1-i; j++){
+            if(songs[j].getYear() < songs[j+1].getYear()){
+                swap(songs[j], songs[j+1]);
+            }
+        }
+    }
+    printSongs(songs);
+}
