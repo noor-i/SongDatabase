@@ -396,6 +396,50 @@ void Database::printSongNameAlpha(Song* songs){
 For each string field in your record, allow the user to list all
 records in reverse alphabetical order.
 */
+void Database::genreRevAlphaOrder(Song* songs){
+    for(int i = 0; i< numSongs - 1; i++){
+        for(int j= 0; j< numSongs-1-i; j++){
+            if(songs[j].getGenre().at(0) < songs[j+1].getGenre().at(0)){
+                swap(songs[j], songs[j+1]);
+            }
+        }
+    }
+}
+
+void Database::printGenreRevAlpha(Song* songs){
+    genreRevAlphaOrder(songs);
+    printSongs(songs);
+}
+
+void Database::artistRevAlphaOrder(Song* songs){
+    for(int i = 0; i< numSongs - 1; i++){
+        for(int j= 0; j< numSongs-1-i; j++){
+            if(songs[j].getArtist().at(0) < songs[j+1].getArtist().at(0)){
+                swap(songs[j], songs[j+1]);
+            }
+        }
+    }   
+}
+
+void Database::printArtistRevAlpha(Song* songs){
+    artistRevAlphaOrder(songs);
+    printSongs(songs);
+}
+
+void Database::songNameRevAlphaOrder(Song* songs){
+    for(int i = 0; i< numSongs - 1; i++){
+        for(int j= 0; j< numSongs-1-i; j++){
+            if(songs[j].getTitle().at(0) < songs[j+1].getTitle().at(0)){
+                swap(songs[j], songs[j+1]);
+            }
+        }
+    }    
+}
+
+void Database::printSongNameRevAlpha(Song* songs){
+    songNameRevAlphaOrder(songs);
+    printSongs(songs);    
+}
 
 /*
 For each numeric field in your record, allow the user to list all
