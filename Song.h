@@ -3,8 +3,6 @@
 
 // Song Class: A class that stores a single database record.
 #include <iostream>
-#include <stdlib.h>
-#include <stdio.h>
 #include <string>
 
 class Song {
