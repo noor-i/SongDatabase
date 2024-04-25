@@ -16,8 +16,10 @@ s1.setArtist("Cigarettes After Sex");
 
 std::cout << "song artist: " << s1.getArtist()<< "\n";
 
-Database db;
+Database db(8);
 
 db.addSong(s1);
+db.deleteByString(s1.getArtist());
+
 
 }

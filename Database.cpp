@@ -10,6 +10,12 @@ Database::Database(Song *songs, int capacity, int numSongs){
     this->numSongs = 0;
 }
 
+Database::Database(int cap) {
+  capacity = cap;
+  numSongs = 0;
+  songs = new Song[capacity];
+}
+
 // Destructor
 Database::~Database(){
     delete[] songs;
@@ -22,6 +28,19 @@ int Database::getCapacity() const{
 
 int Database::getCurrentSize() const{
     return numSongs;
+}
+
+// Print songs
+void Database::printSongs(const Song *songs){
+    for(int i =0; i<numSongs; i++){
+        std::cout << "(Genre, Song name, Artist, Year)\n"
+                                        << "------------------------------\n"
+                                        << songs[i].getGenre() 
+                                        << ", " << songs[i].getTitle()
+                                        << ", " << songs[i].getArtist()
+                                        << ", " << songs[i].getYear()
+                                        << std::endl;
+    }
 }
 
 /*
@@ -103,10 +122,10 @@ void Database::stringSearch(std::string string){
         if(songs[i].getGenre() == string || 
            songs[i].getTitle() == string ||
            songs[i].getArtist() == string){
-                std::cout << "Genre: " << songs[i].getGenre() 
-                          << " Title: " << songs[i].getTitle()
-                          << " Artist: " << songs[i].getArtist()
-                          << " Year: " << songs[i].getYear() << std::endl;
+                std::cout << songs[i].getGenre() 
+                          << ", " << songs[i].getTitle()
+                          << ", " << songs[i].getArtist()
+                          << ", " << songs[i].getYear() << std::endl;
             }
             flag = true;
         
@@ -129,10 +148,10 @@ void Database::substringSearch(std::string string){
         if(songs[i].getGenre().find(string) != std::string::npos || 
            songs[i].getTitle().find(string) != std::string::npos ||
            songs[i].getArtist().find(string) != std::string::npos){
-                std::cout << "Genre: " << songs[i].getGenre() 
-                          << " Title: " << songs[i].getTitle()
-                          << " Artist: " << songs[i].getArtist()
-                          << " Year: " << songs[i].getYear() << std::endl;
+                std::cout << songs[i].getGenre() 
+                          << ", " << songs[i].getTitle()
+                          << ", " << songs[i].getArtist()
+                          << ", " << songs[i].getYear() << std::endl;
             }
         flag = true;
     }
@@ -150,10 +169,10 @@ void Database::yearSearch(int year){
     bool flag = false;
     for(int i = 0; i< numSongs; i++){
         if(songs[i].getYear() == year){
-                std::cout << "Genre: " << songs[i].getGenre() 
-                          << " Title: " << songs[i].getTitle()
-                          << " Artist: " << songs[i].getArtist()
-                          << " Year: " << songs[i].getYear() << std::endl;
+                std::cout << songs[i].getGenre() 
+                          << ", " << songs[i].getTitle()
+                          << ", " << songs[i].getArtist()
+                          << ", " << songs[i].getYear() << std::endl;
             }
         flag = true;
     }
@@ -173,10 +192,10 @@ void Database::rangeSearch(int year1, int year2){
     for(int i = 0; i< numSongs; i++){
         if (songs[i].getYear() == year1 ||
             songs[i].getYear() == year2){
-                std::cout << "Genre: " << songs[i].getGenre() 
-                          << " Title: " << songs[i].getTitle()
-                          << " Artist: " << songs[i].getArtist()
-                          << " Year: " << songs[i].getYear() << std::endl;
+                std::cout << songs[i].getGenre() 
+                          << ", " << songs[i].getTitle()
+                          << ", " << songs[i].getArtist()
+                          << ", " << songs[i].getYear() << std::endl;
             }
             flag = true; 
     }
@@ -206,10 +225,10 @@ void Database::deleteByString(std::string string){
         if(songs[i].getGenre() == string || 
            songs[i].getTitle() == string ||
            songs[i].getArtist() == string){
-                std::cout << "Genre: " << songs[i].getGenre() 
-                          << " Title: " << songs[i].getTitle()
-                          << " Artist: " << songs[i].getArtist()
-                          << " Year: " << songs[i].getYear() << std::endl;
+                std::cout << songs[i].getGenre() 
+                          << ", " << songs[i].getTitle()
+                          << ", " << songs[i].getArtist()
+                          << ", " << songs[i].getYear() << std::endl;
             }
             flag = true;
             std::cout << "Are you sure you want to delete the following song? (Y/N)" << std::endl;
@@ -236,10 +255,10 @@ void Database::deleteBySubString(std::string string){
         if(songs[i].getGenre().find(string) != std::string::npos || 
            songs[i].getTitle().find(string) != std::string::npos ||
            songs[i].getArtist().find(string) != std::string::npos){
-                std::cout << "Genre: " << songs[i].getGenre() 
-                          << " Title: " << songs[i].getTitle()
-                          << " Artist: " << songs[i].getArtist()
-                          << " Year: " << songs[i].getYear() << std::endl;
+                std::cout << songs[i].getGenre() 
+                          << ", " << songs[i].getTitle()
+                          << ", " << songs[i].getArtist()
+                          << ", " << songs[i].getYear() << std::endl;
             }
         flag = true;
         std::cout << "Are you sure you want to delete the following song? (Y/N)" << std::endl;
@@ -264,10 +283,10 @@ void Database::deleteByYear(int year){
     bool flag = false;
     for(int i = 0; i< numSongs; i++){
         if(songs[i].getYear() == year){
-                std::cout << "Genre: " << songs[i].getGenre() 
-                          << " Title: " << songs[i].getTitle()
-                          << " Artist: " << songs[i].getArtist()
-                          << " Year: " << songs[i].getYear() << std::endl;
+                std::cout << songs[i].getGenre() 
+                          << ", " << songs[i].getTitle()
+                          << ", " << songs[i].getArtist()
+                          << ", " << songs[i].getYear() << std::endl;
             }
         flag = true;
         std::cout << "Are you sure you want to delete the following song? (Y/N)" << std::endl;
@@ -295,10 +314,10 @@ void Database::deleteByRange(int year1, int year2){
     for(int i = 0; i< numSongs; i++){
         if (songs[i].getYear() == year1 ||
             songs[i].getYear() == year2){
-                std::cout << "Genre: " << songs[i].getGenre() 
-                          << " Title: " << songs[i].getTitle()
-                          << " Artist: " << songs[i].getArtist()
-                          << " Year: " << songs[i].getYear() << std::endl;
+                std::cout << songs[i].getGenre() 
+                          << ", " << songs[i].getTitle()
+                          << ", " << songs[i].getArtist()
+                          << ", " << songs[i].getYear() << std::endl;
             }
             flag = true; 
             std::cout << "Are you sure you want to delete the following song? (Y/N)" << std::endl;
@@ -321,6 +340,29 @@ void Database::deleteByRange(int year1, int year2){
 For each string field in your record, allow the user to list all
 records in alphabetical order.
 */
+void Database::swap(std::string str1, std::string str2){
+    std::string temp = str1;
+    str1 = str2;
+    str2 = temp;
+}
+
+void Database::printGenreAlphaOrder(const Song* songs){
+    for(int i = 0; i< numSongs - 1; i++){
+        for(int j= 0; j< numSongs-1-i; j++){
+            if(songs[j].getGenre().at(0) > songs[j+1].getGenre().at(0)){
+                swap(songs[j].getGenre(), songs[j+1].getGenre());
+            }
+        }
+    }
+}
+
+void Database::printArtistAlphaOrder(const Song* songs){
+
+}
+
+void Database::printSongNameAlphaOrder(const Song* songs){
+
+}
 
 /*
 For each string field in your record, allow the user to list all

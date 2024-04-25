@@ -15,6 +15,7 @@ public:
     Database();
     Database(Song *songs, int capacity, int numSongs);
     Database(const Database& other);
+    Database(int initialCapacity);
 
     // Destructor
     ~Database();
@@ -45,7 +46,13 @@ public:
     void deleteByRange(int year1, int year2);
 
     // Listing songs
-    
+    void swap(std::string str1, std::string str2);
+    void printGenreAlphaOrder(const Song* songs);
+    void printArtistAlphaOrder(const Song* songs);
+    void printSongNameAlphaOrder(const Song* songs);
+
+    // Printing songs
+    void printSongs(const Song *song);
 };
 
 #endif //DATABASE_H
