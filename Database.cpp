@@ -31,10 +31,10 @@ int Database::getCurrentSize() const{
 }
 
 // Print songs
-void Database::printSongs(const Song *songs){
+void Database::printSongs(Song *songs){
     for(int i =0; i<numSongs; i++){
         std::cout << "(Genre, Song name, Artist, Year)\n"
-                                        << "------------------------------\n"
+                                        << "(Genre, Song name, Artist, Year)\n"
                                         << songs[i].getGenre() 
                                         << ", " << songs[i].getTitle()
                                         << ", " << songs[i].getArtist()
@@ -340,29 +340,57 @@ void Database::deleteByRange(int year1, int year2){
 For each string field in your record, allow the user to list all
 records in alphabetical order.
 */
-void Database::swap(std::string str1, std::string str2){
-    std::string temp = str1;
-    str1 = str2;
-    str2 = temp;
+void Database::swap(Song song1, Song song2){
+    Song temp = song1;
+    song1 = song2;
+    song2 = temp;
 }
 
-void Database::printGenreAlphaOrder(const Song* songs){
+void Database::genreAlphaOrder(Song* songs){
     for(int i = 0; i< numSongs - 1; i++){
         for(int j= 0; j< numSongs-1-i; j++){
             if(songs[j].getGenre().at(0) > songs[j+1].getGenre().at(0)){
-                swap(songs[j].getGenre(), songs[j+1].getGenre());
+                swap(songs[j], songs[j+1]);
             }
         }
     }
 }
 
-void Database::printArtistAlphaOrder(const Song* songs){
-
+void Database::printGenreAlpha(Song *songs){
+    genreAlphaOrder(songs);
+    printSongs(songs);
 }
 
-void Database::printSongNameAlphaOrder(const Song* songs){
-
+void Database::artistAlphaOrder(Song* songs){
+    for(int i = 0; i< numSongs - 1; i++){
+        for(int j= 0; j< numSongs-1-i; j++){
+            if(songs[j].getArtist().at(0) > songs[j+1].getArtist().at(0)){
+                swap(songs[j], songs[j+1]);
+            }
+        }
+    }
 }
+
+void Database::printArtistAlpha(Song* songs){
+    artistAlphaOrder(songs);
+    printSongs(songs);
+}
+
+void Database::songNameAlphaOrder(Song* songs){
+    for(int i = 0; i< numSongs - 1; i++){
+        for(int j= 0; j< numSongs-1-i; j++){
+            if(songs[j].getTitle().at(0) > songs[j+1].getTitle().at(0)){
+                swap(songs[j], songs[j+1]);
+            }
+        }
+    }
+}
+
+void Database::printSongNameAlpha(Song* songs){
+    songNameAlphaOrder(songs);
+    printSongs(songs);
+}
+
 
 /*
 For each string field in your record, allow the user to list all
