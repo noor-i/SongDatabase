@@ -1,6 +1,7 @@
+// Database Class: stores all records.
+
 #ifndef DATABASE_H
 #define DATABASE_H
-// Database Class: stores all records.
 #include <string>
 #include "Song.h"
 

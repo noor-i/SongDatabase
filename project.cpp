@@ -1,10 +1,12 @@
 // main file
 #include "Song.h"
 #include "Database.h"
-//#include "Menu.h"
+#include "Menu.h"
+#include <fstream>
 
 
 int main() {
+/*
 Song s1 = Song("Indie", "K", "CAS", 2013);
 
 std::cout << "(Genre, Song name, Artist, Year)\n"
@@ -23,6 +25,8 @@ Database db(8);
 
 db.addSong(s1);
 db.deleteByString(s1.getArtist());
+*/
+
 
 
 }
