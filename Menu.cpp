@@ -1,7 +1,7 @@
 // Menu.cpp
 #include "Menu.h"
 
-Menu::Menu(){}
+Menu::Menu(Database &db):db(db){}
 
 void Menu::displayMainMenu() const{
     std::cout << "\nWelcome to the Song Database\n" <<
@@ -53,8 +53,9 @@ void Menu::fullMenu()
         break;
     case 2:
         subFindMenu();
+        break;
     default:
-        std::cout << "Goodbye!" << std::endl;
+        std::cout << "\nGoodbye!" << std::endl;
         break;
     }
 }
@@ -81,6 +82,7 @@ void Menu::subFindMenu(){
         std::cout << "Enter a song name:\n";
         std::string songName;
         std::cin >> songName;
+        std::cout << "--------------\n";
         db.songNameSearch(songName);
         return subFindMenu();
     }
@@ -88,6 +90,7 @@ void Menu::subFindMenu(){
         std::cout << "Enter an artist name:\n";
         std::string artistName;
         std::cin >> artistName;
+        std::cout << "--------------\n";
         db.artistSearch(artistName);
         return subFindMenu();
     }
@@ -95,6 +98,7 @@ void Menu::subFindMenu(){
         std::cout << "Enter a genre name:\n";
         std::string genreName;
         std::cin >> genreName;
+        std::cout << "--------------\n";
         db.genreSearch(genreName);
         return subFindMenu();
     }
@@ -102,6 +106,7 @@ void Menu::subFindMenu(){
         std::cout << "Enter a year:\n";
         int year;
         std::cin >> year;
+        std::cout << "--------------\n";
         db.yearSearch(year);
         return subFindMenu();
     }
@@ -112,6 +117,7 @@ void Menu::subFindMenu(){
         std::cin >> year1;
         std::cout << "Enter the second year:\n";
         std::cin >> year2;
+        std::cout << "--------------\n";
         db.rangeSearch(year1, year2);
         return subFindMenu();
     }
@@ -119,6 +125,7 @@ void Menu::subFindMenu(){
         std::cout << "Enter any non-numeric keyword:\n";
         std::string substring;
         std::cin >> substring;
+        std::cout << "--------------\n";
         db.substringSearch(substring);
         return subFindMenu();
     }

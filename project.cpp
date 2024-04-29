@@ -6,7 +6,7 @@
 int main() {
     Database db;
     db.readFromFile("database.txt");
-    Menu menu;
+    Menu menu(db);
     menu.fullMenu();
 }
 

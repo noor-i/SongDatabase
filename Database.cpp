@@ -46,11 +46,11 @@ int Database::getCurrentSize() const
 // Print songs
 void Database::printSongs(Song *songs)
 {
+    std::cout << "(Genre, Song name, Artist, Year)\n"
+              << "------------------------------" << std::endl;
     for (int i = 0; i < numSongs; i++)
     {
-        std::cout << "(Genre, Song name, Artist, Year)\n"
-                  << "(Genre, Song name, Artist, Year)\n"
-                  << songs[i].getGenre()
+        std::cout << songs[i].getGenre()
                   << ", " << songs[i].getTitle()
                   << ", " << songs[i].getArtist()
                   << ", " << songs[i].getYear()
@@ -155,6 +155,7 @@ void Database::readFromFile(const std::string& filename) {
         Song song(genre, title, artist, year);
         addSong(song);
     } 
+    //printSongs(songs);
     myFileStream.close(); 
 }
 
@@ -166,7 +167,7 @@ appropriate field of a record.
 */
 void Database::genreSearch(std::string string)
 {
-    bool flag;
+    bool flag = false;
     for (int i = 0; i < numSongs; i++)
     {
         if (songs[i].getGenre() == string)
@@ -195,8 +196,8 @@ void Database::songNameSearch(std::string string)
                       << ", " << songs[i].getTitle()
                       << ", " << songs[i].getArtist()
                       << ", " << songs[i].getYear() << std::endl;
+            flag = true;
         }
-        flag = true;
     }
     if (flag == false)
     {
@@ -216,8 +217,8 @@ void Database::artistSearch(std::string string)
                       << ", " << songs[i].getTitle()
                       << ", " << songs[i].getArtist()
                       << ", " << songs[i].getYear() << std::endl;
+            flag = true;          
         }
-        flag = true;
     }
     if (flag == false)
     {
@@ -245,8 +246,8 @@ void Database::substringSearch(std::string string)
                       << ", " << songs[i].getTitle()
                       << ", " << songs[i].getArtist()
                       << ", " << songs[i].getYear() << std::endl;
+            flag = true;
         }
-        flag = true;
     }
     if (flag == false)
     {
@@ -270,8 +271,8 @@ void Database::yearSearch(int year)
                       << ", " << songs[i].getTitle()
                       << ", " << songs[i].getArtist()
                       << ", " << songs[i].getYear() << std::endl;
+            flag = true;
         }
-        flag = true;
     }
     if (flag == false)
     {
@@ -297,8 +298,8 @@ void Database::rangeSearch(int year1, int year2)
                       << ", " << songs[i].getTitle()
                       << ", " << songs[i].getArtist()
                       << ", " << songs[i].getYear() << std::endl;
+            flag = true;
         }
-        flag = true;
     }
     if (flag == false)
     {

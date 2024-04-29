@@ -6,9 +6,9 @@
 
 class Menu {
 private:
-    Database db;
+    Database &db;
 public:
-    Menu();
+    Menu(Database& db);
     void displayMainMenu() const;
     int getUserChoice() const;
     void subFindMenu();
