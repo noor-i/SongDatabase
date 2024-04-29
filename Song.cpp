@@ -16,6 +16,7 @@ Song::Song(std::string genre, std::string title, std::string artist, int year)
 // Copy Constructor
 Song::Song(const Song &other)
 {
+    genre = other.genre;
     title = other.title;
     artist = other.artist;
     year = other.year;

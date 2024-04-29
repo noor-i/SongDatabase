@@ -1,9 +1,11 @@
 // Database Class: stores all records.
-
 #ifndef DATABASE_H
 #define DATABASE_H
-#include <string>
 #include "Song.h"
+#include <string>
+#include <iostream>
+#include <fstream>
+#include <sstream>
 
 class Database {
 private:
@@ -25,15 +27,19 @@ public:
     int getCapacity() const; // get capacity 
     int getCurrentSize() const; // get current number of songs in playlist
 
-    // Methods //
     // Printing songs
     void printSongs(Song *songs);
 
     // Adding songs
     void addSong(const Song& song); 
 
+    // Read songs from file
+    void readFromFile(const std::string& filename);
+
     // Finding songs
-    void stringSearch(std::string string); 
+    void genreSearch(std::string string);
+    void songNameSearch(std::string string);
+    void artistSearch(std::string string);
     void substringSearch(std::string string);
     void yearSearch(int year);
     void rangeSearch(int year1, int year2);
@@ -51,7 +57,6 @@ public:
     void deleteByRange(int year1, int year2);
 
     // Listing songs alphabetically 
-    void swap(Song song1, Song song2);
     void genreAlphaOrder(Song* songs);
     void printGenreAlpha(Song* songs);
     void artistAlphaOrder(Song* songs);
@@ -60,7 +65,6 @@ public:
     void printSongNameAlpha(Song* songs);
 
     // Listing songs reverse alphabetically 
-    void swap(Song song1, Song song2);
     void genreRevAlphaOrder(Song* songs);
     void printGenreRevAlpha(Song* songs);
     void artistRevAlphaOrder(Song* songs);

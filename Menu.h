@@ -5,10 +5,14 @@
 #include <iostream>
 
 class Menu {
+private:
+    Database db;
 public:
     Menu();
     void displayMainMenu() const;
-    char getUserChoice() const;
+    int getUserChoice() const;
+    void subFindMenu();
+    void fullMenu();
 };
 
 #endif // MENU_H
