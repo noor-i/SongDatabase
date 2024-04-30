@@ -70,7 +70,8 @@ void Menu::addMenu(){
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         newSong = Song(genre, songName, artist, year);
         db.addSong(newSong);
-        std::cout << "Song added!" << std::endl;
+        std::cout << "Song added!\n";
+        fullMenu();
 }
 
 void Menu::findMenu(){
