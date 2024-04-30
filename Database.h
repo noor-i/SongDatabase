@@ -6,6 +6,8 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <cctype> // used for tolower() & toupper()
+#include <algorithm> // used for std::transform()
 
 class Database {
 private:
@@ -28,7 +30,8 @@ public:
     int getCurrentSize() const; // get current number of songs in playlist
 
     // Printing songs
-    void printSongs(Song *songs);
+    void printSongs();
+    void printSong(int i);
 
     // Adding songs
     void addSong(const Song& song); 
@@ -40,7 +43,6 @@ public:
     void genreSearch(std::string string);
     void songNameSearch(std::string string);
     void artistSearch(std::string string);
-    void substringSearch(std::string string);
     void yearSearch(int year);
     void rangeSearch(int year1, int year2);
 
@@ -48,33 +50,28 @@ public:
     bool songDuplicate(const Song &song);
     bool isValidYear(int year);
     void deleteRecord(int index);
-    void swap(Song song1, Song song2);
+    void swap(Song &song1, Song &song2);
+    std::string convertToUppercase(std::string str);
+    std::string convertToLowercase(std::string str);
 
     // Deleting songs
     void deleteByString(std::string string);
-    void deleteBySubString(std::string string);
     void deleteByYear(int year);
     void deleteByRange(int year1, int year2);
 
     // Listing songs alphabetically 
-    void genreAlphaOrder(Song* songs);
-    void printGenreAlpha(Song* songs);
-    void artistAlphaOrder(Song* songs);
-    void printArtistAlpha(Song* songs);
-    void songNameAlphaOrder(Song* songs);
-    void printSongNameAlpha(Song* songs);
+    void genreAlphaOrder();
+    void artistAlphaOrder();
+    void songNameAlphaOrder();
 
     // Listing songs reverse alphabetically 
-    void genreRevAlphaOrder(Song* songs);
-    void printGenreRevAlpha(Song* songs);
-    void artistRevAlphaOrder(Song* songs);
-    void printArtistRevAlpha(Song* songs);
-    void songNameRevAlphaOrder(Song* songs);
-    void printSongNameRevAlpha(Song* songs);
+    void genreRevAlphaOrder();
+    void artistRevAlphaOrder();
+    void songNameRevAlphaOrder();
 
     // Listing songs ascending/descending by year
-    void printAscendOrder(Song *songs);
-    void printDescendOrder(Song *songs);
+    void ascendOrder();
+    void descendOrder();
 };
 
 #endif //DATABASE_H

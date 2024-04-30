@@ -11,7 +11,17 @@ public:
     Menu(Database& db);
     void displayMainMenu() const;
     int getUserChoice() const;
-    void subFindMenu();
+
+    void deleteMenu();
+
+    void findMenu();
+
+    void listMenu();
+    void subListGenreMenu();
+    void subListSongNameMenu(); 
+    void subListArtistMenu();
+    void subListYearMenu();
+
     void fullMenu();
 };
 

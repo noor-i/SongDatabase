@@ -1,7 +1,6 @@
 // Database.cpp
 #include "Database.h"
 
-/*Constructors*/
 //default constructor 
 Database::Database() : songs(new Song[30]), capacity(30), numSongs(0) {}
 
@@ -32,7 +31,6 @@ Database::~Database()
     delete[] songs;
 }
 
-// Getters
 int Database::getCapacity() const
 {
     return capacity;
@@ -43,8 +41,15 @@ int Database::getCurrentSize() const
     return numSongs;
 }
 
+void Database::printSong(int i){
+    std::cout << songs[i].getGenre()
+                      << ", " << songs[i].getTitle()
+                      << ", " << songs[i].getArtist()
+                      << ", " << songs[i].getYear() << std::endl;
+}
+
 // Print songs
-void Database::printSongs(Song *songs)
+void Database::printSongs()
 {
     std::cout << "(Genre, Song name, Artist, Year)\n"
               << "------------------------------" << std::endl;
@@ -159,6 +164,18 @@ void Database::readFromFile(const std::string& filename) {
     myFileStream.close(); 
 }
 
+// Helper: converts genre, song name, artist name to uppercase for finding songs.
+// Note: std::transform takes three iterators and a unary operation as arguments. 
+std::string Database::convertToUppercase(std::string str){
+    std::transform(str.begin(), str.end(), str.begin(), ::toupper);
+    return str;    
+}
+
+// Helper: converts genre, song name, artist name to uppercase for finding songs.
+std::string Database::convertToLowercase(std::string str){
+    std::transform(str.begin(), str.end(), str.begin(), ::tolower); 
+    return str;
+}
 
 /*
 (1 mark) When searching for strings, one kind of search should print all
@@ -168,14 +185,13 @@ appropriate field of a record.
 void Database::genreSearch(std::string string)
 {
     bool flag = false;
-    for (int i = 0; i < numSongs; i++)
+    for(int i = 0; i < numSongs; i++)
     {
-        if (songs[i].getGenre() == string)
+        if (convertToLowercase(songs[i].getGenre()) == string ||
+            convertToUppercase(songs[i].getGenre()) == string ||
+            songs[i].getGenre() == string)
         {
-            std::cout << songs[i].getGenre()
-                      << ", " << songs[i].getTitle()
-                      << ", " << songs[i].getArtist()
-                      << ", " << songs[i].getYear() << std::endl;
+            printSong(i);
             flag = true;
         }
     }
@@ -190,12 +206,11 @@ void Database::songNameSearch(std::string string)
     bool flag = false;
     for (int i = 0; i < numSongs; i++)
     {
-        if (songs[i].getTitle() == string)
+        if (convertToLowercase(songs[i].getTitle()) == string ||
+            convertToUppercase(songs[i].getTitle()) == string ||
+            songs[i].getTitle() == string)
         {
-            std::cout << songs[i].getGenre()
-                      << ", " << songs[i].getTitle()
-                      << ", " << songs[i].getArtist()
-                      << ", " << songs[i].getYear() << std::endl;
+            printSong(i);
             flag = true;
         }
     }
@@ -211,42 +226,12 @@ void Database::artistSearch(std::string string)
     bool flag = false;
     for (int i = 0; i < numSongs; i++)
     {
-        if (songs[i].getArtist() == string)
+        if (convertToLowercase(songs[i].getArtist()) == string ||
+            convertToUppercase(songs[i].getArtist()) == string ||
+            songs[i].getArtist() == string)
         {
-            std::cout << songs[i].getGenre()
-                      << ", " << songs[i].getTitle()
-                      << ", " << songs[i].getArtist()
-                      << ", " << songs[i].getYear() << std::endl;
+            printSong(i);
             flag = true;          
-        }
-    }
-    if (flag == false)
-    {
-        std::cout << "No results found." << std::endl;
-    }
-}
-
-/*
-(1 mark) When searching for strings, one kind of search should print all
-records where the typed-in string from the user occurs as a substring in the
-appropriate field of a record.
-
-// find returns std::string::npos if no substring in fields matches the search string.
-*/
-void Database::substringSearch(std::string string)
-{
-    bool flag = false;
-    for (int i = 0; i < numSongs; i++)
-    {
-        if (songs[i].getGenre().find(string) != std::string::npos ||
-            songs[i].getTitle().find(string) != std::string::npos ||
-            songs[i].getArtist().find(string) != std::string::npos)
-        {
-            std::cout << songs[i].getGenre()
-                      << ", " << songs[i].getTitle()
-                      << ", " << songs[i].getArtist()
-                      << ", " << songs[i].getYear() << std::endl;
-            flag = true;
         }
     }
     if (flag == false)
@@ -267,10 +252,7 @@ void Database::yearSearch(int year)
     {
         if (songs[i].getYear() == year)
         {
-            std::cout << songs[i].getGenre()
-                      << ", " << songs[i].getTitle()
-                      << ", " << songs[i].getArtist()
-                      << ", " << songs[i].getYear() << std::endl;
+            printSong(i);
             flag = true;
         }
     }
@@ -291,13 +273,10 @@ void Database::rangeSearch(int year1, int year2)
     bool flag = false;
     for (int i = 0; i < numSongs; i++)
     {
-        if (songs[i].getYear() == year1 ||
-            songs[i].getYear() == year2)
+        if (songs[i].getYear() >= year1 && 
+            songs[i].getYear() <= year2 )
         {
-            std::cout << songs[i].getGenre()
-                      << ", " << songs[i].getTitle()
-                      << ", " << songs[i].getArtist()
-                      << ", " << songs[i].getYear() << std::endl;
+            printSong(i);
             flag = true;
         }
     }
@@ -334,10 +313,7 @@ void Database::deleteByString(std::string string)
             songs[i].getTitle() == string ||
             songs[i].getArtist() == string)
         {
-            std::cout << songs[i].getGenre()
-                      << ", " << songs[i].getTitle()
-                      << ", " << songs[i].getArtist()
-                      << ", " << songs[i].getYear() << std::endl;
+            printSong(i);
         }
         flag = true;
         std::cout << "Are you sure you want to delete the following song? (Y/N)" << std::endl;
@@ -359,42 +335,6 @@ void Database::deleteByString(std::string string)
     }
 }
 
-/*(1 mark) When deleting a record, one way to do this is to search for a
-substring that occurs in a field of the record.*/
-void Database::deleteBySubString(std::string string)
-{
-    bool flag = false;
-    for (int i = 0; i < numSongs; i++)
-    {
-        if (songs[i].getGenre().find(string) != std::string::npos ||
-            songs[i].getTitle().find(string) != std::string::npos ||
-            songs[i].getArtist().find(string) != std::string::npos)
-        {
-            std::cout << songs[i].getGenre()
-                      << ", " << songs[i].getTitle()
-                      << ", " << songs[i].getArtist()
-                      << ", " << songs[i].getYear() << std::endl;
-        }
-        flag = true;
-        std::cout << "Are you sure you want to delete the following song? (Y/N)" << std::endl;
-        std::string result;
-        std::cin >> result;
-        if (result == "Y" || result == "y")
-        {
-            deleteRecord(i);
-            std::cout << "Song deleted." << std::endl;
-        }
-        else
-        {
-            std::cout << "Deletion cancelled." << std::endl;
-        }
-    }
-    if (flag == false)
-    {
-        std::cout << "No results found." << std::endl;
-    }
-}
-
 /*(1 mark) When deleting a record, one way to do this is to search by the
 exact number that occurs in a field of the record.*/
 void Database::deleteByYear(int year)
@@ -404,10 +344,7 @@ void Database::deleteByYear(int year)
     {
         if (songs[i].getYear() == year)
         {
-            std::cout << songs[i].getGenre()
-                      << ", " << songs[i].getTitle()
-                      << ", " << songs[i].getArtist()
-                      << ", " << songs[i].getYear() << std::endl;
+            printSong(i);
         }
         flag = true;
         std::cout << "Are you sure you want to delete the following song? (Y/N)" << std::endl;
@@ -441,10 +378,7 @@ void Database::deleteByRange(int year1, int year2)
         if (songs[i].getYear() == year1 ||
             songs[i].getYear() == year2)
         {
-            std::cout << songs[i].getGenre()
-                      << ", " << songs[i].getTitle()
-                      << ", " << songs[i].getArtist()
-                      << ", " << songs[i].getYear() << std::endl;
+            printSong(i);
         }
         flag = true;
         std::cout << "Are you sure you want to delete the following song? (Y/N)" << std::endl;
@@ -470,142 +404,112 @@ void Database::deleteByRange(int year1, int year2)
 For each string field in your record, allow the user to list all
 records in alphabetical order.
 */
-void Database::swap(Song song1, Song song2)
+void Database::swap(Song &song1, Song &song2)
 {
     Song temp = song1;
     song1 = song2;
     song2 = temp;
 }
 
-void Database::genreAlphaOrder(Song *songs)
+void Database::genreAlphaOrder()
 {
     for (int i = 0; i < numSongs - 1; i++)
     {
         for (int j = 0; j < numSongs - 1 - i; j++)
         {
-            if (songs[j].getGenre().at(0) > songs[j + 1].getGenre().at(0))
+            if (songs[j].getGenre() > songs[j + 1].getGenre())
             {
                 swap(songs[j], songs[j + 1]);
             }
         }
     }
+    printSongs();
 }
 
-void Database::printGenreAlpha(Song *songs)
-{
-    genreAlphaOrder(songs);
-    printSongs(songs);
-}
-
-void Database::artistAlphaOrder(Song *songs)
+void Database::artistAlphaOrder()
 {
     for (int i = 0; i < numSongs - 1; i++)
     {
         for (int j = 0; j < numSongs - 1 - i; j++)
         {
-            if (songs[j].getArtist().at(0) > songs[j + 1].getArtist().at(0))
+            if (songs[j].getArtist() > songs[j + 1].getArtist())
             {
                 swap(songs[j], songs[j + 1]);
             }
         }
     }
+    printSongs();
 }
 
-void Database::printArtistAlpha(Song *songs)
-{
-    artistAlphaOrder(songs);
-    printSongs(songs);
-}
-
-void Database::songNameAlphaOrder(Song *songs)
+void Database::songNameAlphaOrder()
 {
     for (int i = 0; i < numSongs - 1; i++)
     {
         for (int j = 0; j < numSongs - 1 - i; j++)
         {
-            if (songs[j].getTitle().at(0) > songs[j + 1].getTitle().at(0))
+            if (songs[j].getTitle() > songs[j + 1].getTitle())
             {
                 swap(songs[j], songs[j + 1]);
             }
         }
     }
-}
-
-void Database::printSongNameAlpha(Song *songs)
-{
-    songNameAlphaOrder(songs);
-    printSongs(songs);
+    printSongs();
 }
 
 /*
 For each string field in your record, allow the user to list all
 records in reverse alphabetical order.
 */
-void Database::genreRevAlphaOrder(Song *songs)
+void Database::genreRevAlphaOrder()
 {
     for (int i = 0; i < numSongs - 1; i++)
     {
         for (int j = 0; j < numSongs - 1 - i; j++)
         {
-            if (songs[j].getGenre().at(0) < songs[j + 1].getGenre().at(0))
+            if (songs[j].getGenre() < songs[j + 1].getGenre())
             {
                 swap(songs[j], songs[j + 1]);
             }
         }
     }
+    printSongs();
 }
 
-void Database::printGenreRevAlpha(Song *songs)
-{
-    genreRevAlphaOrder(songs);
-    printSongs(songs);
-}
-
-void Database::artistRevAlphaOrder(Song *songs)
+void Database::artistRevAlphaOrder()
 {
     for (int i = 0; i < numSongs - 1; i++)
     {
         for (int j = 0; j < numSongs - 1 - i; j++)
         {
-            if (songs[j].getArtist().at(0) < songs[j + 1].getArtist().at(0))
+            if (songs[j].getArtist() < songs[j + 1].getArtist())
             {
                 swap(songs[j], songs[j + 1]);
             }
         }
     }
+    printSongs();
 }
 
-void Database::printArtistRevAlpha(Song *songs)
-{
-    artistRevAlphaOrder(songs);
-    printSongs(songs);
-}
-
-void Database::songNameRevAlphaOrder(Song *songs)
+void Database::songNameRevAlphaOrder()
 {
     for (int i = 0; i < numSongs - 1; i++)
     {
         for (int j = 0; j < numSongs - 1 - i; j++)
         {
-            if (songs[j].getTitle().at(0) < songs[j + 1].getTitle().at(0))
+            if (songs[j].getTitle() < songs[j + 1].getTitle())
             {
                 swap(songs[j], songs[j + 1]);
             }
         }
     }
-}
-
-void Database::printSongNameRevAlpha(Song *songs)
-{
-    songNameRevAlphaOrder(songs);
-    printSongs(songs);
+    printSongs();
 }
 
 /*
 For each numeric field in your record, allow the user to list all
 records in ascending order.
 */
-void Database::printAscendOrder(Song *songs)
+void Database::ascendOrder()
 {
     for (int i = 0; i < numSongs - 1; i++)
     {
@@ -617,14 +521,14 @@ void Database::printAscendOrder(Song *songs)
             }
         }
     }
-    printSongs(songs);
+    printSongs();
 }
 
 /*
 For each numeric field in your record, allow the user to list all
 records in descending order.
 */
-void Database::printDescendOrder(Song *songs)
+void Database::descendOrder()
 {
     for (int i = 0; i < numSongs - 1; i++)
     {
@@ -636,5 +540,5 @@ void Database::printDescendOrder(Song *songs)
             }
         }
     }
-    printSongs(songs);
+    printSongs();
 }

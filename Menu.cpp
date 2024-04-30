@@ -17,12 +17,15 @@ void Menu::displayMainMenu() const{
 int Menu::getUserChoice() const{
     int input;
     std::cin >> input;
-    if(input == 1 ||input == 2 || input == 3 || input == 4 || input == 5){
-        return input;
+    if (std::cin.fail() || input < 1 || input > 5) {
+        std::cin.clear();  // Clear the fail state
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');  // Ignore the bad input
+        std::cout << "\nThat option does not exist. Please select from 1-5.\n\n";
+        return getUserChoice();
     }
     else{
-        std::cout << "Incorrect selection. Select an option from 1-5.\n" << std::endl;
-        return getUserChoice();
+        std::cin.ignore();
+        return input;
     }
 }
 
@@ -52,7 +55,13 @@ void Menu::fullMenu()
         std::cout << "Song added!" << std::endl;
         break;
     case 2:
-        subFindMenu();
+        findMenu();
+        break;
+    case 3:
+        deleteMenu();
+        break;
+    case 4:
+        listMenu();
         break;
     default:
         std::cout << "\nGoodbye!" << std::endl;
@@ -60,7 +69,7 @@ void Menu::fullMenu()
     }
 }
 
-void Menu::subFindMenu(){
+void Menu::findMenu(){
     std::cout << "\nFind a Song\n" <<
                  "------------\n" <<
                  "You can search by: \n\n" <<
@@ -69,67 +78,224 @@ void Menu::subFindMenu(){
                  "(3) Name of genre\n" <<
                  "(4) Year \n" <<
                  "(5) Year Range (XXXX, YYYY)\n" <<
-                 "(6) General search\n" <<
-                 "(7) Return to Main Menu\n\n" <<
+                 "(6) Return to Main Menu\n\n" <<
                  "Select your option: " << std::endl; 
     int choice;
     std::cin >> choice;
-    if(choice < 1 || choice > 7){
-        std::cout << "That option does not exist, Please try again.";
-        return subFindMenu();
+    std::cin.ignore();  // Ignore the newline character
+    if(std::cin.fail() || choice < 1 || choice > 7){
+        std::cin.clear(); // clear fail state
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');  // Ignore the bad input
+        std::cout << "\nThat option does not exist, Please try again.\n\n";
+        return findMenu();
     }
     if(choice == 1){
-        std::cout << "Enter a song name:\n";
+        std::cout << "\nEnter a song name:\n";
         std::string songName;
-        std::cin >> songName;
+        std::getline(std::cin, songName);
         std::cout << "--------------\n";
         db.songNameSearch(songName);
-        return subFindMenu();
+        return findMenu();
     }
     if(choice == 2){
-        std::cout << "Enter an artist name:\n";
+        std::cout << "\nEnter an artist name:\n";
         std::string artistName;
-        std::cin >> artistName;
+        std::getline(std::cin, artistName);
         std::cout << "--------------\n";
         db.artistSearch(artistName);
-        return subFindMenu();
+        return findMenu();
     }
     if(choice == 3){
-        std::cout << "Enter a genre name:\n";
+        std::cout << "\nEnter a genre name:\n";
         std::string genreName;
-        std::cin >> genreName;
+        std::getline(std::cin, genreName);
         std::cout << "--------------\n";
         db.genreSearch(genreName);
-        return subFindMenu();
+        return findMenu();
     }
     if(choice == 4){
-        std::cout << "Enter a year:\n";
+        std::cout << "\nEnter a year:\n";
         int year;
         std::cin >> year;
+        std::cin.ignore();  // Ignore the newline character
         std::cout << "--------------\n";
         db.yearSearch(year);
-        return subFindMenu();
+        return findMenu();
     }
     if(choice == 5){
-        std::cout << "To enter a year range, please enter the first year:\n";
+        std::cout << "\nTo enter a year range, please enter the first year:\n";
         int year1;
         int year2;
         std::cin >> year1;
+        std::cin.ignore();  // Ignore the newline character
         std::cout << "Enter the second year:\n";
         std::cin >> year2;
+        std::cin.ignore();  // Ignore the newline character
         std::cout << "--------------\n";
         db.rangeSearch(year1, year2);
-        return subFindMenu();
+        return findMenu();
     }
-    if(choice == 6){
-        std::cout << "Enter any non-numeric keyword:\n";
-        std::string substring;
-        std::cin >> substring;
-        std::cout << "--------------\n";
-        db.substringSearch(substring);
-        return subFindMenu();
-    }
-    else if(choice == 7) {
+    else if(choice == 6) {
         fullMenu();
     }
+}
+
+void Menu::deleteMenu(){
+    std::cout << "In progress...." << std::endl;
+}
+
+void Menu::listMenu(){
+    std::cout << "\nListing songs\n" <<
+                 "------------\n" <<
+                 "You can sort songs by: \n\n" <<
+                 "(1) Genre\n" <<
+                 "(2) Song name\n" <<
+                 "(3) Artist\n" <<
+                 "(4) Year \n" <<
+                 "(5) Return to Main Menu\n\n" <<
+                 "Select your option: " << std::endl; 
+    int choice;
+    std::cin >> choice;
+    std::cin.ignore();  // Ignore the newline character
+    if (std::cin.fail() || choice < 1 || choice > 5) {
+        std::cin.clear();  // Clear the fail state
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');  // Ignore the bad input
+        std::cout << "\nThat option does not exist, Please try again.\n\n";
+        return listMenu();
+    }
+    if(choice == 1){
+        subListGenreMenu();          
+    }
+    if(choice == 2){
+        subListSongNameMenu(); 
+    }   
+    if(choice == 3){
+        subListArtistMenu();
+    } 
+    if(choice == 4){
+        subListYearMenu(); 
+    }
+    else if(choice == 5){
+        fullMenu();
+    }
+}
+
+void Menu::subListGenreMenu(){
+    std::cout << "\nSort Genres by:\n" <<
+                     "-----------------\n" <<
+                     "(1) Alphabetical Order\n" <<
+                     "(2) Reverse Alphabetical Order\n" <<
+                     "(3) Go back\n\n" <<
+                     "Select your option: " << std::endl; 
+
+                    int input;
+                    std::cin >> input;
+                    std::cin.ignore();  // Ignore the newline character
+                    if(std::cin.fail() || input < 1 || input > 3){
+                        std::cin.clear(); // clear the fail state
+                        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');  // Ignore the bad input
+                        std::cout << "\nThat option does not exist, Please try again.\n\n";
+                        return subListGenreMenu();
+                    }
+                    if(input == 1){
+                        db.genreAlphaOrder();
+                        listMenu();
+                    }
+                    if(input == 2){
+                        db.genreRevAlphaOrder();
+                        listMenu();
+                    }
+                    else if(input == 3){
+                        listMenu();
+                    }  
+}
+
+void Menu::subListSongNameMenu(){
+    std::cout << "\nSort Song names by:\n" <<
+                     "-----------------\n" <<
+                     "(1) Alphabetical Order\n" <<
+                     "(2) Reverse Alphabetical Order\n" <<
+                     "(3) Go back\n\n" <<
+                     "Select your option: " << std::endl; 
+
+                    int input;
+                    std::cin >> input;
+                    std::cin.ignore();  // Ignore the newline character
+                    if(std::cin.fail() || input < 1 || input > 3){
+                        std::cin.clear(); // clear the fail state
+                        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');  // Ignore the bad input
+                        std::cout << "\nThat option does not exist, Please try again.\n\n";
+                        return subListSongNameMenu();
+                    }
+                    if(input == 1){
+                        db.songNameAlphaOrder();
+                        listMenu();
+                    }
+                    if(input == 2){
+                        db.songNameRevAlphaOrder();
+                        listMenu();
+                    }
+                    else if(input == 3){
+                        listMenu();
+                    }  
+}
+
+void Menu::subListArtistMenu(){
+    std::cout << "\nSort Artists by:\n" <<
+                     "------------------\n" <<
+                     "(1) Alphabetical Order\n" <<
+                     "(2) Reverse Alphabetical Order\n" <<
+                     "(3) Go back\n\n" <<
+                     "Select your option: " << std::endl;  
+
+                    int input;
+                    std::cin >> input;
+                    std::cin.ignore();  // Ignore the newline character
+                    if(std::cin.fail() || input < 1 || input > 3){
+                        std::cin.clear(); // clear the fail state
+                        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');  // Ignore the bad input
+                        std::cout << "\nThat option does not exist, Please try again.\n\n";
+                        return subListArtistMenu();
+                    }
+                    if(input == 1){
+                        db.artistAlphaOrder();
+                        listMenu();
+                    }
+                    if(input == 2){
+                        db.artistRevAlphaOrder();
+                        listMenu();
+                    }
+                    else if(input == 3){
+                        listMenu();
+                    }  
+}
+
+void Menu::subListYearMenu(){
+    std::cout << "\nSort Years by:\n" <<
+                     "-----------------\n" <<
+                     "(1) Ascending Order\n" <<
+                     "(2) Descending Order\n" <<
+                     "(3) Go back\n\n" <<
+                     "Select your option: " << std::endl;
+
+                    int input;
+                    std::cin >> input;
+                    std::cin.ignore();  // Ignore the newline character
+                    if(std::cin.fail() || input < 1 || input > 3){
+                        std::cin.clear();
+                        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                        std::cout << "\nThat option does not exist, Please try again.\n\n";
+                        return subListYearMenu();
+                    }
+                    if(input == 1){
+                        db.ascendOrder();
+                        listMenu();
+                    }
+                    if(input == 2){
+                        db.descendOrder();
+                        listMenu();
+                    }
+                    else if(input == 3){
+                        listMenu();
+                    }  
 }
