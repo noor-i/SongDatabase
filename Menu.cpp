@@ -33,26 +33,11 @@ void Menu::fullMenu()
 {
     displayMainMenu();
     int choice = getUserChoice();
-    Song newSong;
-    std::string genre, songName, artist;
-    int year;
 
     switch (choice)
     {
     case 1:
-        std::cout << "Enter the genre: " << std::endl;
-        std::cin >> genre;
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Clear input buffer
-        std::cout << "Enter song title: "<< std::endl;
-        std::getline(std::cin, songName);
-        std::cout << "Enter song artist: "<< std::endl;
-        std::getline(std::cin, artist);
-        std::cout << "Enter song year: "<< std::endl;
-        std::cin >> year;
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        newSong = Song(genre, songName, artist, year);
-        db.addSong(newSong);
-        std::cout << "Song added!" << std::endl;
+        addMenu();
         break;
     case 2:
         findMenu();
@@ -67,6 +52,25 @@ void Menu::fullMenu()
         std::cout << "\nGoodbye!" << std::endl;
         break;
     }
+}
+
+void Menu::addMenu(){
+    Song newSong;
+    std::string genre, songName, artist;
+    int year;
+    std::cout << "Enter the genre: " << std::endl;
+        std::cin >> genre;
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Clear input buffer
+        std::cout << "Enter song title: "<< std::endl;
+        std::getline(std::cin, songName);
+        std::cout << "Enter song artist: "<< std::endl;
+        std::getline(std::cin, artist);
+        std::cout << "Enter song year: "<< std::endl;
+        std::cin >> year;
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        newSong = Song(genre, songName, artist, year);
+        db.addSong(newSong);
+        std::cout << "Song added!" << std::endl;
 }
 
 void Menu::findMenu(){

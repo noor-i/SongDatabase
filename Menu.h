@@ -12,6 +12,8 @@ public:
     void displayMainMenu() const;
     int getUserChoice() const;
 
+    void addMenu();
+
     void deleteMenu();
 
     void findMenu();
