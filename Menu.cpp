@@ -152,11 +152,11 @@ void Menu::findMenu(){
 }
 
 void Menu::deleteMenu(){
-    std::cout << "Delete by:\n" <<
+    std::cout << "\nDelete by:\n" <<
                  "---------------\n" <<
                  "(1) Keyword\n" <<
                  "(2) Year\n" <<
-                 "(3) Range (XXXX, YYYY)\n" <<
+                 "(3) Year Range (XXXX, YYYY)\n" <<
                  "(4) Main Menu\n" << std::endl;
     int input;
     std::cin >> input;

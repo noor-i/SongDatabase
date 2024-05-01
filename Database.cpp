@@ -107,18 +107,29 @@ void Database::addSong(const Song &song)
     }
     songs[numSongs] = song;
     numSongs++;
-    std::cout << "Song added!\n"; // confirm song has been added
+    //std::cout << "Song added!\n"; // confirm song has been added
 }
 
 // Checks if a the song exists in the playlist already.
 bool Database::songDuplicate(const Song &song)
 {
     for (int i = 0; i < numSongs; i++)
-    {
-        if (songs[i].getGenre() == song.getGenre() &&
+    {   
+        // Checks regular, lowercase, and uppercase input to match duplicate song entries.
+        if ((songs[i].getGenre() == song.getGenre() && 
             songs[i].getTitle() == song.getTitle() &&
             songs[i].getArtist() == song.getArtist() &&
-            songs[i].getYear() == song.getYear())
+            songs[i].getYear() == song.getYear()) ||
+
+            (convertToLowercase(songs[i].getGenre()) == song.getGenre() &&
+            convertToLowercase(songs[i].getTitle()) == song.getTitle() &&
+            convertToLowercase(songs[i].getArtist()) == song.getArtist() &&
+            songs[i].getYear() == song.getYear()) ||
+
+            (convertToUppercase(songs[i].getGenre()) == song.getGenre() &&
+            convertToUppercase(songs[i].getTitle()) == song.getTitle() &&
+            convertToUppercase(songs[i].getArtist()) == song.getArtist() &&
+            songs[i].getYear() == song.getYear())) 
         {
             return true;
         }
@@ -306,10 +317,19 @@ void Database::deleteRecord(int index)
 
 void Database::deleteByString(const std::string& keyword)
 {
-    for (int i = 0; i < numSongs; ){
+    for (int i = 0; i < numSongs;){
         if (songs[i].getGenre() == keyword ||
             songs[i].getTitle() == keyword ||
-            songs[i].getArtist() == keyword){
+            songs[i].getArtist() == keyword ||
+
+            convertToLowercase(songs[i].getGenre()) == keyword ||
+            convertToLowercase(songs[i].getTitle()) == keyword ||
+            convertToLowercase(songs[i].getArtist()) == keyword ||
+
+            convertToUppercase(songs[i].getGenre()) == keyword ||
+            convertToUppercase(songs[i].getTitle()) == keyword ||
+            convertToUppercase(songs[i].getArtist()) == keyword)
+            {
             // Print the song
             printSong(i);
 
@@ -344,7 +364,30 @@ void Database::deleteByString(const std::string& keyword)
 exact number that occurs in a field of the record.*/
 void Database::deleteByYear(int year)
 {
-    
+    for(int i = 0; i < numSongs;){
+        if(songs[i].getYear() == year){
+            printSong(i);
+            std::cout << "\nDo you want to delete the following song? (Y/N)\n";
+            std::string input;
+            std::cin >> input;
+            std::cin.ignore();
+
+            if(std::cin.fail() || input == "n" || input == "N"){
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');  
+                std::cout << "\nDeletion cancelled." << std::endl;
+                ++i; //increment i only if song has not been deleted
+            }
+            else if(input == "y" || input == "Y"){
+                deleteRecord(i);
+                std::cout << "\nSong deleted." << std::endl;
+                // not incrementing because next song has been shifted here
+            }
+        }
+        else{
+            ++i;
+        }
+    }
 }
 
 /*
@@ -353,7 +396,7 @@ numbers in a field that appear in a low to high range of numbers.
 */
 void Database::deleteByRange(int year1, int year2)
 {
-    
+std::cout << "In progress...." << std::endl;    
 }
 
 /*
