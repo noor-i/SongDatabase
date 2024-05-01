@@ -58,17 +58,17 @@ void Menu::addMenu(){
     Song newSong;
     std::string genre, songName, artist;
     int year;
-    std::cout << "Enter the genre: " << std::endl;
+    std::cout << "\nEnter the genre: \n";
     std::cin >> genre;
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); 
 
-    std::cout << "Enter song title: "<< std::endl;
+    std::cout << "Enter song title: \n";
     std::getline(std::cin, songName);
 
-    std::cout << "Enter song artist: "<< std::endl;
+    std::cout << "Enter song artist: \n";
     std::getline(std::cin, artist);
 
-    std::cout << "Enter song year: "<< std::endl;
+    std::cout << "Enter song year: \n";;
     while (!(std::cin >> year) || !db.isValidYear(year)) {
         std::cin.clear();
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -77,6 +77,7 @@ void Menu::addMenu(){
 
     newSong = Song(genre, songName, artist, year);
     db.addSong(newSong);
+    std::cout << "Song added!\n" << std::endl;
     fullMenu();
 }
 
