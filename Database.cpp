@@ -160,7 +160,7 @@ void Database::readFromFile(const std::string& filename) {
     int year;
 
     std::string line, myString;
-    while(std::getline(myFileStream, line)){//file:where to look, line: where to store that line 
+    while(std::getline(myFileStream, line)){ // file: where to look, line: where to store line 
         std::stringstream ss(line);
         std::getline(ss, genre, ','); 
         std::getline(ss, title, ',');
