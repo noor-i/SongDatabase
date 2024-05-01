@@ -56,9 +56,6 @@ public:
 
     // Deleting songs
     void deleteByString(const std::string& string);
-    //void deleteByGenre(std::string string);
-    //void deleteBySongName(std::string string);
-    //void deleteByArtist(std::string string);
     void deleteByYear(int year);
     void deleteByRange(int year1, int year2);
 
