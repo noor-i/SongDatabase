@@ -1,4 +1,4 @@
-# 🎹 🎵 🎧 Song Database 🎧 🎵 🎹
+# 🎹 🎧 Song Database 🎧 🎹
 ![Main Menu Screenshot](https://github.com/noor-i/SongDatabase/assets/57691234/ec631ed4-b05a-4bf0-b9b2-181e1891170c)
 
 
