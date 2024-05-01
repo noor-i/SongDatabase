@@ -105,9 +105,9 @@ void Database::addSong(const Song &song)
         std::cout << "The year is not valid." << std::endl;
         return;
     }
-
     songs[numSongs] = song;
     numSongs++;
+    std::cout << "Song added!\n"; // confirm song has been added
 }
 
 // Checks if a the song exists in the playlist already.
@@ -304,34 +304,39 @@ void Database::deleteRecord(int index)
     numSongs--;
 }
 
-void Database::deleteByString(std::string string)
+void Database::deleteByString(const std::string& keyword)
 {
-    bool flag = false;
-    for (int i = 0; i < numSongs; i++)
-    {
-        if (songs[i].getGenre() == string ||
-            songs[i].getTitle() == string ||
-            songs[i].getArtist() == string)
-        {
+    for (int i = 0; i < numSongs; ){
+        if (songs[i].getGenre() == keyword ||
+            songs[i].getTitle() == keyword ||
+            songs[i].getArtist() == keyword){
+            // Print the song
             printSong(i);
-        }
-        flag = true;
-        std::cout << "Are you sure you want to delete the following song? (Y/N)" << std::endl;
-        std::string result;
-        std::cin >> result;
-        if (result == "Y" || result == "y")
-        {
-            deleteRecord(i);
-            std::cout << "Song deleted." << std::endl;
+
+            // Ask the user if they want to delete the song
+            std::cout << "\nDo you want to delete the following song? (Y/N)\n";
+            std::string input;
+            std::cin >> input;
+            std::cin.ignore();
+            // If the user wants to delete the song, delete it
+            if (input == "Y" || input == "y")
+            {
+                deleteRecord(i);
+                std::cout << "Song deleted.\n";
+                // Do not increment i, because the next song has been shifted to this index
+            }
+            else
+            {
+                std::cout << "Deletion cancelled.\n";
+                // Increment i, because we're keeping this song
+                ++i;
+            }
         }
         else
         {
-            std::cout << "Deletion cancelled." << std::endl;
+            // Increment i, because this song doesn't match the keyword
+            ++i;
         }
-    }
-    if (flag == false)
-    {
-        std::cout << "No matching record found." << std::endl;
     }
 }
 
@@ -339,31 +344,7 @@ void Database::deleteByString(std::string string)
 exact number that occurs in a field of the record.*/
 void Database::deleteByYear(int year)
 {
-    bool flag = false;
-    for (int i = 0; i < numSongs; i++)
-    {
-        if (songs[i].getYear() == year)
-        {
-            printSong(i);
-        }
-        flag = true;
-        std::cout << "Are you sure you want to delete the following song? (Y/N)" << std::endl;
-        std::string result;
-        std::cin >> result;
-        if (result == "Y" || result == "y")
-        {
-            deleteRecord(i);
-            std::cout << "Song deleted." << std::endl;
-        }
-        else
-        {
-            std::cout << "Deletion cancelled." << std::endl;
-        }
-    }
-    if (flag == false)
-    {
-        std::cout << "No results found." << std::endl;
-    }
+    
 }
 
 /*
@@ -372,32 +353,7 @@ numbers in a field that appear in a low to high range of numbers.
 */
 void Database::deleteByRange(int year1, int year2)
 {
-    bool flag = false;
-    for (int i = 0; i < numSongs; i++)
-    {
-        if (songs[i].getYear() == year1 ||
-            songs[i].getYear() == year2)
-        {
-            printSong(i);
-        }
-        flag = true;
-        std::cout << "Are you sure you want to delete the following song? (Y/N)" << std::endl;
-        std::string result;
-        std::cin >> result;
-        if (result == "Y" || result == "y")
-        {
-            deleteRecord(i);
-            std::cout << "Song deleted." << std::endl;
-        }
-        else
-        {
-            std::cout << "Deletion cancelled." << std::endl;
-        }
-    }
-    if (flag == false)
-    {
-        std::cout << "No results found." << std::endl;
-    }
+    
 }
 
 /*

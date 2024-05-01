@@ -59,19 +59,25 @@ void Menu::addMenu(){
     std::string genre, songName, artist;
     int year;
     std::cout << "Enter the genre: " << std::endl;
-        std::cin >> genre;
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Clear input buffer
-        std::cout << "Enter song title: "<< std::endl;
-        std::getline(std::cin, songName);
-        std::cout << "Enter song artist: "<< std::endl;
-        std::getline(std::cin, artist);
-        std::cout << "Enter song year: "<< std::endl;
-        std::cin >> year;
+    std::cin >> genre;
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Clear input buffer
+
+    std::cout << "Enter song title: "<< std::endl;
+    std::getline(std::cin, songName);
+
+    std::cout << "Enter song artist: "<< std::endl;
+    std::getline(std::cin, artist);
+
+    std::cout << "Enter song year: "<< std::endl;
+    while (!(std::cin >> year) || !db.isValidYear(year)) {
+        std::cin.clear();
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        newSong = Song(genre, songName, artist, year);
-        db.addSong(newSong);
-        std::cout << "Song added!\n";
-        fullMenu();
+        std::cout << "Invalid year. Please re-enter a year: \n";
+    }
+
+    newSong = Song(genre, songName, artist, year);
+    db.addSong(newSong);
+    fullMenu();
 }
 
 void Menu::findMenu(){
@@ -146,7 +152,71 @@ void Menu::findMenu(){
 }
 
 void Menu::deleteMenu(){
-    std::cout << "In progress...." << std::endl;
+    std::cout << "Delete by:\n" <<
+                 "---------------\n" <<
+                 "(1) Keyword\n" <<
+                 "(2) Year\n" <<
+                 "(3) Range (XXXX, YYYY)\n" <<
+                 "(4) Main Menu\n" << std::endl;
+    int input;
+    std::cin >> input;
+    std::cin.ignore();
+    if(std::cin.fail() || input < 1 || input > 4){
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');  
+        std::cout << "\nThat option does not exist, Please try again.\n\n";
+        deleteMenu();
+    }
+    if(input == 1){
+        std::cout << "\nEnter a Genre, Song name, or Artist:\n" << std::endl;
+        std::string keyword;
+        std::cin >> keyword;
+        std::cin.ignore();
+        if(std::cin.fail()){
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');  
+            std::cout << "\nPlease try again.\n\n";
+            deleteMenu();
+        }
+        db.deleteByString(keyword);
+        deleteMenu();
+    }
+    if(input == 2){
+        std::cout << "\nEnter a Year:\n" << std::endl;
+        int year;
+        std::cin >> year;
+        std::cin.ignore();
+        if(std::cin.fail()){
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');  
+            std::cout << "\nPlease try again.\n\n";
+            deleteMenu();
+        }
+        db.deleteByYear(year);
+        deleteMenu();
+    } 
+    if(input == 3){
+        std::cout << "\nEnter the first year of the range:\n";
+        int year1, year2;
+        std::cin >> year1;
+        std::cin.ignore();
+
+        std::cout << "\nEnter the second year of the range:\n";
+        std::cin >> year2;
+        std::cin.ignore();
+
+        if(std::cin.fail()){
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');  
+            std::cout << "\nPlease try again.\n\n";
+            deleteMenu();
+        }
+        db.deleteByRange(year1, year2);
+        deleteMenu();
+    }
+    else if(input == 4){
+        fullMenu();
+    }   
 }
 
 void Menu::listMenu(){
