@@ -175,6 +175,11 @@ void Database::readFromFile(const std::string& filename) {
     myFileStream.close(); 
 }
 
+// Write songs from the Database object back into the database.txt file after quitting.
+void Database::writeToFile(const std::string& filename){
+    std::cout << "in progress..." << std::endl;
+}
+
 // Helper: converts genre, song name, artist name to uppercase for finding songs.
 // Note: std::transform takes three iterators and a unary operation as arguments. 
 std::string Database::convertToUppercase(std::string str){

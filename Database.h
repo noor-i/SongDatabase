@@ -38,6 +38,8 @@ public:
 
     // Read songs from file
     void readFromFile(const std::string& filename);
+    // Write songs to file
+    void writeToFile(const std::string& filename);
 
     // Finding songs
     void genreSearch(std::string string);
