@@ -8,6 +8,7 @@
 #include <sstream>
 #include <cctype> // used for tolower() & toupper()
 #include <algorithm> // used for std::transform()
+#include <limits>
 
 class Database {
 private:
