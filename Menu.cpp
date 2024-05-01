@@ -19,7 +19,7 @@ int Menu::getUserChoice() const{
     std::cin >> input;
     if (std::cin.fail() || input < 1 || input > 5) {
         std::cin.clear();  // Clear the fail state
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');  // Ignore the bad input
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Clear input buffer 
         std::cout << "\nThat option does not exist. Please select from 1-5.\n\n";
         return getUserChoice();
     }
@@ -60,7 +60,7 @@ void Menu::addMenu(){
     int year;
     std::cout << "Enter the genre: " << std::endl;
     std::cin >> genre;
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Clear input buffer
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); 
 
     std::cout << "Enter song title: "<< std::endl;
     std::getline(std::cin, songName);
@@ -96,7 +96,7 @@ void Menu::findMenu(){
     std::cin.ignore();  // Ignore the newline character
     if(std::cin.fail() || choice < 1 || choice > 7){
         std::cin.clear(); // clear fail state
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');  // Ignore the bad input
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');  
         std::cout << "\nThat option does not exist, Please try again.\n\n";
         return findMenu();
     }
@@ -231,7 +231,7 @@ void Menu::listMenu(){
     std::cin.ignore();  // Ignore the newline character
     if (std::cin.fail() || choice < 1 || choice > 5) {
         std::cin.clear();  // Clear the fail state
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');  // Ignore the bad input
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');  
         std::cout << "\nThat option does not exist, Please try again.\n\n";
         return listMenu();
     }
@@ -265,7 +265,7 @@ void Menu::subListGenreMenu(){
                     std::cin.ignore();  // Ignore the newline character
                     if(std::cin.fail() || input < 1 || input > 3){
                         std::cin.clear(); // clear the fail state
-                        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');  // Ignore the bad input
+                        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');  
                         std::cout << "\nThat option does not exist, Please try again.\n\n";
                         return subListGenreMenu();
                     }
@@ -295,7 +295,7 @@ void Menu::subListSongNameMenu(){
                     std::cin.ignore();  // Ignore the newline character
                     if(std::cin.fail() || input < 1 || input > 3){
                         std::cin.clear(); // clear the fail state
-                        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');  // Ignore the bad input
+                        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); 
                         std::cout << "\nThat option does not exist, Please try again.\n\n";
                         return subListSongNameMenu();
                     }
