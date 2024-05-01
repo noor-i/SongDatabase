@@ -177,7 +177,17 @@ void Database::readFromFile(const std::string& filename) {
 
 // Write songs from the Database object back into the database.txt file after quitting.
 void Database::writeToFile(const std::string& filename){
-    std::cout << "in progress..." << std::endl;
+    std::ofstream myFileStream(filename);
+    if(!myFileStream.is_open()){
+       std::cout << "Unable to open file: " << filename << std::endl; 
+    }
+    for(int i = 0; i< numSongs; i++){
+        myFileStream << songs[i].getGenre() << ", "
+                     << songs[i].getTitle() << ", "
+                     << songs[i].getArtist() << ", "
+                     << songs[i].getYear() << "\n";
+    }
+    myFileStream.close();
 }
 
 // Helper: converts genre, song name, artist name to uppercase for finding songs.

@@ -50,6 +50,7 @@ void Menu::fullMenu()
         break;
     default:
         std::cout << "\nGoodbye!" << std::endl;
+        db.writeToFile("database.txt");
         break;
     }
 }
