@@ -317,6 +317,7 @@ void Database::deleteRecord(int index)
 
 void Database::deleteByString(const std::string& keyword)
 {
+    bool flag = false;
     for (int i = 0; i < numSongs;){
         if (songs[i].getGenre() == keyword ||
             songs[i].getTitle() == keyword ||
@@ -332,6 +333,7 @@ void Database::deleteByString(const std::string& keyword)
             {
             // Print the song
             printSong(i);
+            flag = true;
 
             // Ask the user if they want to delete the song
             std::cout << "\nDo you want to delete the following song? (Y/N)\n";
@@ -358,23 +360,66 @@ void Database::deleteByString(const std::string& keyword)
             ++i;
         }
     }
+    if(flag == false){
+       std::cout << "No song from the keyword " << keyword << " was found.\n"; 
+    }
 }
 
 /*(1 mark) When deleting a record, one way to do this is to search by the
 exact number that occurs in a field of the record.*/
 void Database::deleteByYear(int year)
-{
+{   bool flag = false;
     for(int i = 0; i < numSongs;){
         if(songs[i].getYear() == year){
             printSong(i);
+            flag = true;
             std::cout << "\nDo you want to delete the following song? (Y/N)\n";
             std::string input;
-            std::cin >> input;
-            std::cin.ignore();
-
-            if(std::cin.fail() || input == "n" || input == "N"){
+            
+            while(!(std::cin >> input)){
                 std::cin.clear();
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');  
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                std::cout << "\nThat option does not exist. Please try again: \n" << std::endl;  
+            }
+
+            if(input == "n" || input == "N"){
+                std::cout << "\nDeletion cancelled." << std::endl;
+                ++i; //increment i only if song has not been deleted
+            }
+            else if(input == "y" || input == "Y"){
+                deleteRecord(i);
+                std::cout << "\nSong deleted.\n" << std::endl;
+                // not incrementing because next song has been shifted here
+            }
+        }
+        else{
+            ++i;
+        }
+    }
+    if(flag == false){
+        std::cout << "No song from the year " << year << " was found.\n";
+    }
+}
+
+/*
+(1 mark) When deleting a record, one way to do this is to search for
+numbers in a field that appear in a low to high range of numbers.
+*/
+void Database::deleteByRange(int year1, int year2){
+    bool flag = false;
+    for(int i=0; i<numSongs;){
+        if(songs[i].getYear() >= year1 && songs[i].getYear() <= year2){
+            printSong(i);
+            flag = true;
+            std::cout << "\nDo you want to delete the following song? (Y/N)\n";
+            std::string input;
+
+            while(!(std::cin >> input)){
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                std::cout << "\nThat option does not exist. Please try again: \n" << std::endl;  
+            }
+            if(input == "n" || input == "N"){
                 std::cout << "\nDeletion cancelled." << std::endl;
                 ++i; //increment i only if song has not been deleted
             }
@@ -388,15 +433,9 @@ void Database::deleteByYear(int year)
             ++i;
         }
     }
-}
-
-/*
-(1 mark) When deleting a record, one way to do this is to search for
-numbers in a field that appear in a low to high range of numbers.
-*/
-void Database::deleteByRange(int year1, int year2)
-{
-std::cout << "In progress...." << std::endl;    
+    if(flag == false){
+        std::cout << "No results found." << std::endl;;
+    }
 }
 
 /*

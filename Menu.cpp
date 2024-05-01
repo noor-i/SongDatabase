@@ -160,7 +160,7 @@ void Menu::deleteMenu(){
                  "(4) Main Menu\n" << std::endl;
     int input;
     std::cin >> input;
-    std::cin.ignore();
+
     if(std::cin.fail() || input < 1 || input > 4){
         std::cin.clear();
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');  
@@ -170,13 +170,11 @@ void Menu::deleteMenu(){
     if(input == 1){
         std::cout << "\nEnter a Genre, Song name, or Artist:\n" << std::endl;
         std::string keyword;
-        std::cin >> keyword;
-        std::cin.ignore();
-        if(std::cin.fail()){
+
+        while(!(std::cin >> keyword)){
             std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');  
             std::cout << "\nPlease try again.\n\n";
-            deleteMenu();
         }
         db.deleteByString(keyword);
         deleteMenu();
@@ -184,12 +182,11 @@ void Menu::deleteMenu(){
     if(input == 2){
         std::cout << "\nEnter a Year:\n" << std::endl;
         int year;
-        std::cin >> year;
-        std::cin.ignore();
-        if(std::cin.fail()){
+
+        if(!(std::cin >> year)){
             std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');  
-            std::cout << "\nPlease try again.\n\n";
+            std::cout << "\nNot a valid year. Please try again.\n\n";
             deleteMenu();
         }
         db.deleteByYear(year);
