@@ -182,9 +182,9 @@ void Database::writeToFile(const std::string& filename){
        std::cout << "Unable to open file: " << filename << std::endl; 
     }
     for(int i = 0; i< numSongs; i++){
-        myFileStream << songs[i].getGenre() << ", "
-                     << songs[i].getTitle() << ", "
-                     << songs[i].getArtist() << ", "
+        myFileStream << songs[i].getGenre() << ","
+                     << songs[i].getTitle() << ","
+                     << songs[i].getArtist() << ","
                      << songs[i].getYear() << "\n";
     }
     myFileStream.close();
