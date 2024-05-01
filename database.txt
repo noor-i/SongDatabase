@@ -1,25 +1,25 @@
-R&B,  My Girl,  The Temptations, 1964
-R&B,  I Want You Back,  The Jackson 5, 1969
-R&B,  Let's Get It On,  Marvin Gaye, 1973
-R&B,  I Will Always Love You,  Whitney Houston, 1992
-R&B,  Waterfalls,  TLC, 1995
-R&B,  Ignition,  R. Kelly, 2002
-R&B,  Crazy in Love,  Beyoncé feat. Jay-Z, 2003
-Indie Pop,  Somebody Told Me,  The Killers, 2004
-Indie Rock,  Feel Good Inc.,  Gorillaz, 2005
-Rock,  Electric Feel,  MGMT, 2007
-Rap,  Heartless,  Kanye West, 2008
-Indie Pop,  Pumped Up Kicks,  Foster the People, 2010
-Indie,  Somebody That I Used to Know,  Gotye feat. Kimbra, 2011
-Country,  Mean,  Taylor Swift, 2011
-R&B,  Adorn,  Miguel, 2012
-Indie,  Take Me to Church,  Hozier, 2013
-Indie Rock,  Do I Wanna Know?,  Arctic Monkeys, 2013
-R&B,  Uptown Funk,  Mark Ronson feat. Bruno Mars, 2014
-Kpop,  Thursday,  GOT7, 2019
-Kpop,  90's Love,  NCTU, 2020
-Hip-hop,  Sweet/I Thought You Wanted to Dance,  Tyler the Creator, 2021
-R&B,  Best Time,  Brent Faiyaz, 2023
-Hip-hop,  Deli,  Ice Spice, 2023
-Hip-hop,  Never Lose Me,  Flo Milli, 2023
-Indie,  Dangerous Ideas,  Mabisyo, 2023
+R&B,   My Girl,   The Temptations, 1964
+R&B,   I Want You Back,   The Jackson 5, 1969
+R&B,   Let's Get It On,   Marvin Gaye, 1973
+R&B,   I Will Always Love You,   Whitney Houston, 1992
+R&B,   Waterfalls,   TLC, 1995
+R&B,   Ignition,   R. Kelly, 2002
+R&B,   Crazy in Love,   Beyoncé feat. Jay-Z, 2003
+Indie Pop,   Somebody Told Me,   The Killers, 2004
+Indie Rock,   Feel Good Inc.,   Gorillaz, 2005
+Rock,   Electric Feel,   MGMT, 2007
+Rap,   Heartless,   Kanye West, 2008
+Indie Pop,   Pumped Up Kicks,   Foster the People, 2010
+Indie,   Somebody That I Used to Know,   Gotye feat. Kimbra, 2011
+Country,   Mean,   Taylor Swift, 2011
+R&B,   Adorn,   Miguel, 2012
+Indie,   Take Me to Church,   Hozier, 2013
+Indie Rock,   Do I Wanna Know?,   Arctic Monkeys, 2013
+R&B,   Uptown Funk,   Mark Ronson feat. Bruno Mars, 2014
+Kpop,   Thursday,   GOT7, 2019
+Kpop,   90's Love,   NCTU, 2020
+Hip-hop,   Sweet/I Thought You Wanted to Dance,   Tyler the Creator, 2021
+R&B,   Best Time,   Brent Faiyaz, 2023
+Hip-hop,   Deli,   Ice Spice, 2023
+Hip-hop,   Never Lose Me,   Flo Milli, 2023
+Indie,   Dangerous Ideas,   Mabisyo, 2023
