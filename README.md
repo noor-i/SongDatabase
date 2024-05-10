@@ -19,7 +19,7 @@ The database stores records, each record is comprised of (Genre, Song Name, Arti
 - database.txt: Text file containing database records
 
 ## Usage 💻
-**Compile the Program:** Use the provided Makefile to compile the program. Open a terminal and navigate to the project directory. Then, run the following commands:
+**Compile the Program:** Use the provided Makefile. Open a terminal and navigate to the project directory. Then, run the following commands:
 ```
 $ make
 $ ./output
